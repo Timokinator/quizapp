@@ -19,7 +19,7 @@
     <title>QuizApp</title>
 </head>
 
-<body>
+<body onload="init()">
 
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
@@ -31,48 +31,52 @@
     <div class="container">
         <div class="card quiz-card">
             <img src="./images/brain.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Frage</h5>
+
+            <div class="card-body d-none" id="endScreen">
+                Quiz beendet!
+            </div>
 
 
-                <div class="card mb-2">
-                    <div class="card-body">
+            <div class="card-body" id="questionBody">
+                <h5 class="card-title" id="question-text">Frage</h5>
+
+                <div class="card quiz-answer mb-2" onclick="answer('answer_1')">
+                    <div class="card-body" id="answer_1">
                         Antwort
                     </div>
                 </div>
 
-                <div class="card mb-2">
-                    <div class="card-body">
+                <div class="card quiz-answer mb-2" onclick="answer('answer_2')">
+                    <div class="card-body" id="answer_2">
                         Antwort
                     </div>
                 </div>
 
-                <div class="card mb-2">
-                    <div class="card-body">
+                <div class="card quiz-answer mb-2" onclick="answer('answer_3')">
+                    <div class="card-body" id="answer_3">
                         Antwort
                     </div>
                 </div>
 
-                <div class="card mb-2">
-                    <div class="card-body">
+                <div class="card quiz-answer mb-2" onclick="answer('answer_4')">
+                    <div class="card-body" id="answer_4">
                         Antwort
                     </div>
                 </div>
-
 
                 <div class="question-footer">
                     <span>
-                        <b>1</b> von <b>5</b> Fragen
+                        <b id="actual-question">1</b> von <b id="all-questions">5</b> Fragen
                     </span>
                     <span>
-                        <button class="btn btn-primary">nächste Frage</button>
+                        <button onclick="nextQuestion()" id="next-button" class="btn btn-primary" disabled>nächste
+                            Frage</button>
                     </span>
                 </div>
-
-
             </div>
         </div>
     </div>
+
 
 
 

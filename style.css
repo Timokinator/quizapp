@@ -1,12 +1,11 @@
 body {
     margin: 0;
     background-color: rgb(247, 247, 247);
-
 }
 
 .container {
     background-color: rgb(247, 247, 247);
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,4 +21,23 @@ body {
     justify-content: space-between;
     align-items: center;
     padding-top: 12px;
+}
+
+.quiz-answer:hover {
+    cursor: pointer;
+    background-color: rgba(237, 234, 234, 0.903);
+    scale: 1.01;
+}
+
+.bg-success,
+.bg-danger {
+    color: white;
+}
+
+.d-none {
+    display: none;
+}
+
+.img-end-screen {
+    width: 100%;
 }
