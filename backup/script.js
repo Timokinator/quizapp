@@ -66,13 +66,21 @@ let amountAnsweredAnswers = 0;
 
 function init() {
     document.getElementById("all-questions").innerHTML = questions.length;
+
     showQuestion();
-};
+}
 
 
 function showQuestion() {
     if (currentQuestion >= questions.length) {
-        showEndscreen();
+        document.getElementById('endScreen').classList.toggle('d-none');
+        document.getElementById('questionBody').classList.toggle('d-none');
+        document.getElementById('card-img-top').src = './images/winner1.png';
+        document.getElementById('correct-answers').innerHTML += amountCorrectAnswers;
+        document.getElementById('all-answers').innerHTML += amountAnsweredAnswers;
+        
+
+
     } else {
         let question = questions[currentQuestion];
 
@@ -101,9 +109,10 @@ function answer(selection) {
             document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
         };
         document.getElementById('next-button').disabled = false;
+
         clickable = false;
     };
-};
+}
 
 
 function nextQuestion() {
@@ -117,27 +126,4 @@ function nextQuestion() {
         document.getElementById(element).parentElement.classList.remove('bg-success');
         document.getElementById(element).parentNode.classList.remove('bg-danger');
     };
-};
-
-
-function showEndscreen() {
-    document.getElementById('endScreen').classList.toggle('d-none');
-    document.getElementById('questionBody').classList.toggle('d-none');
-    document.getElementById('card-img-top').src = './images/winner1.png';
-    document.getElementById('correct-answers').innerHTML += amountCorrectAnswers;
-    document.getElementById('all-answers').innerHTML += amountAnsweredAnswers;
-    if (amountCorrectAnswers == questions.length) {
-        document.getElementById('final-comment').innerHTML += /*html*/`
-                Perfektes Ergebnis!
-            `;
-    } else if (amountCorrectAnswers >= questions.length / 2) {
-        document.getElementById('final-comment').innerHTML += /*html*/`
-                Solides Ergebnis!
-            `;
-    } else if (amountCorrectAnswers < questions.length / 2) {
-        document.getElementById('final-comment').innerHTML += /*html*/`
-                Noch viel lernen du musst mein junger Padawan, viel Glück beim nächsten Mal!
-            `;
-    };
-};
-
+}

@@ -11,6 +11,10 @@ body {
     align-items: center;
 }
 
+.navbar {
+    background-color: rgb(97, 109, 165);
+}
+
 .quiz-card {
     width: 30rem;
 }
@@ -40,4 +44,28 @@ body {
 
 .img-end-screen {
     width: 100%;
+    
+}
+
+.final-text p {
+    font-size: 20px;
+    text-align: center;
+}
+
+.final-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.img-final-screen {
+    width: 30%;
+    margin-bottom: 16px;
+}
+
+.container-end-screen-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
