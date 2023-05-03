@@ -117,6 +117,7 @@ function nextQuestion() {
         document.getElementById(element).parentElement.classList.remove('bg-success');
         document.getElementById(element).parentNode.classList.remove('bg-danger');
     };
+    updateProgressBar();
 };
 
 
@@ -124,20 +125,40 @@ function showEndscreen() {
     document.getElementById('endScreen').classList.toggle('d-none');
     document.getElementById('questionBody').classList.toggle('d-none');
     document.getElementById('card-img-top').src = './images/winner1.png';
-    document.getElementById('correct-answers').innerHTML += amountCorrectAnswers;
-    document.getElementById('all-answers').innerHTML += amountAnsweredAnswers;
+    document.getElementById('correct-answers').innerHTML = amountCorrectAnswers;
+    document.getElementById('all-answers').innerHTML = amountAnsweredAnswers;
     if (amountCorrectAnswers == questions.length) {
-        document.getElementById('final-comment').innerHTML += /*html*/`
+        document.getElementById('final-comment').innerHTML = /*html*/`
                 Perfektes Ergebnis!
             `;
     } else if (amountCorrectAnswers >= questions.length / 2) {
-        document.getElementById('final-comment').innerHTML += /*html*/`
+        document.getElementById('final-comment').innerHTML = /*html*/`
                 Solides Ergebnis!
             `;
     } else if (amountCorrectAnswers < questions.length / 2) {
-        document.getElementById('final-comment').innerHTML += /*html*/`
+        document.getElementById('final-comment').innerHTML = /*html*/`
                 Noch viel lernen du musst mein junger Padawan, viel Glück beim nächsten Mal!
             `;
     };
 };
 
+
+function updateProgressBar() {
+    percent = Math.round(currentQuestion / questions.length * 100);
+
+    document.getElementById('progress-bar').innerHTML = /*html*/`${percent} %`;
+    document.getElementById('progress-bar').style = `width: ${percent}%`;
+};
+
+
+function restart() {
+    document.getElementById('endScreen').classList.toggle('d-none');
+    document.getElementById('questionBody').classList.toggle('d-none');
+    document.getElementById('card-img-top').src = './images/brain.jpg';
+    currentQuestion = 0;
+    clickable = true;
+    amountCorrectAnswers = 0;
+    amountAnsweredAnswers = 0;
+    updateProgressBar();
+    init();
+};

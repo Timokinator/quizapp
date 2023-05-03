@@ -31,19 +31,31 @@
         <div class="card quiz-card">
             <img id="card-img-top" src="./images/brain.jpg" class="card-img-top" alt="...">
 
+
+            <!-- Progress Bar Star -->
+            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"
+                aria-valuemin="0" aria-valuemax="100">
+                <div id="progress-bar" class="progress-bar text-bg-warning" style="width: 0%">0%</div>
+            </div>
+            <!-- Progress Bar End -->
+
+
+            <!-- Beginn Div Endscreen-->
             <div class="card-body d-none" id="endScreen">
                 <div id="final-text" class="final-text">
                     <p>Quiz beendet!</p>
                     <img class="img-final-screen" src="./images/trophy_cup.png" alt="">
-                    <p>Du hast <span id="correct-answers"></span> von <span id="all-answers"></span> Fragen richtig
+                    <p>Du hast <span class="bold" id="correct-answers"></span> von <span class="bold"
+                            id="all-answers"></span> Fragen richtig
                         beantwortet!
                     <p id="final-comment"></p>
                     </p>
                 </div>
                 <div class="container-end-screen-btn">
-                    <button onclick="location.reload()" class="btn btn-primary">Neues Spiel</button>
+                    <button onclick="restart()" class="btn btn-primary">Neues Spiel</button>
                 </div>
             </div>
+            <!-- Ende Div Endscreen-->
 
             <div class="card-body" id="questionBody">
                 <h5 class="card-title" id="question-text">Frage</h5>
