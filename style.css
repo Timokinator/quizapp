@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: rgb(247, 247, 247);
+    max-height: 100vh;
 }
 
 .container {
@@ -60,7 +61,7 @@ body {
 }
 
 .img-final-screen {
-    width: 30%;
+    width: 15%;
     margin-bottom: 16px;
 }
 
@@ -75,7 +76,7 @@ body {
 }
 
 footer {
-    font-size: 8px;
+    font-size: 6px;
     border-top: 1px solid grey;
 }
 

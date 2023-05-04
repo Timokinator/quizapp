@@ -62,28 +62,22 @@ let currentQuestion = 0;
 let clickable = true;
 let amountCorrectAnswers = 0;
 let amountAnsweredAnswers = 0;
+let audio_success = new Audio('./sounds/success.mp3');
+let audio_fail = new Audio('./sounds/fail.mp3');
+audio_fail.volume = 0.3;
 
 
 function init() {
     document.getElementById("all-questions").innerHTML = questions.length;
-
     showQuestion();
-}
+};
 
 
 function showQuestion() {
     if (currentQuestion >= questions.length) {
-        document.getElementById('endScreen').classList.toggle('d-none');
-        document.getElementById('questionBody').classList.toggle('d-none');
-        document.getElementById('card-img-top').src = './images/winner1.png';
-        document.getElementById('correct-answers').innerHTML += amountCorrectAnswers;
-        document.getElementById('all-answers').innerHTML += amountAnsweredAnswers;
-        
-
-
+        showEndscreen();
     } else {
         let question = questions[currentQuestion];
-
         document.getElementById('actual-question').innerHTML = currentQuestion + 1;
         document.getElementById("question-text").innerHTML = question["question"];
         document.getElementById("answer_1").innerHTML = question["answer_1"];
@@ -92,6 +86,10 @@ function showQuestion() {
         document.getElementById("answer_4").innerHTML = question["answer_4"];
     };
 };
+
+
+
+
 
 
 function answer(selection) {
@@ -104,18 +102,21 @@ function answer(selection) {
         if (correctAnswer == selectedQuestionNumner) {
             document.getElementById(selection).parentNode.classList.add('bg-success');
             amountCorrectAnswers++;
+            audio_success.play();
         } else {
             document.getElementById(selection).parentNode.classList.add('bg-danger');
             document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+            audio_fail.play();
         };
         document.getElementById('next-button').disabled = false;
-
         clickable = false;
     };
-}
+};
 
 
 function nextQuestion() {
+    stopAudio(audio_fail);
+    stopAudio(audio_success);
     clickable = true;
     currentQuestion++;
     document.getElementById('next-button').disabled = true;
@@ -126,4 +127,53 @@ function nextQuestion() {
         document.getElementById(element).parentElement.classList.remove('bg-success');
         document.getElementById(element).parentNode.classList.remove('bg-danger');
     };
-}
+    updateProgressBar();
+};
+
+
+function showEndscreen() {
+    document.getElementById('endScreen').classList.toggle('d-none');
+    document.getElementById('questionBody').classList.toggle('d-none');
+    document.getElementById('card-img-top').src = './images/winner1.png';
+    document.getElementById('correct-answers').innerHTML = amountCorrectAnswers;
+    document.getElementById('all-answers').innerHTML = amountAnsweredAnswers;
+    if (amountCorrectAnswers == questions.length) {
+        document.getElementById('final-comment').innerHTML = /*html*/`
+                Perfektes Ergebnis!
+            `;
+    } else if (amountCorrectAnswers >= questions.length / 2) {
+        document.getElementById('final-comment').innerHTML = /*html*/`
+                Solides Ergebnis!
+            `;
+    } else if (amountCorrectAnswers < questions.length / 2) {
+        document.getElementById('final-comment').innerHTML = /*html*/`
+                Noch viel lernen du musst mein junger Padawan, viel Glück beim nächsten Mal!
+            `;
+    };
+};
+
+
+function updateProgressBar() {
+    percent = Math.round(currentQuestion / questions.length * 100);
+    document.getElementById('progress-bar').innerHTML = /*html*/`${percent} %`;
+    document.getElementById('progress-bar').style = `width: ${percent}%`;
+};
+
+
+function restart() {
+    document.getElementById('endScreen').classList.toggle('d-none');
+    document.getElementById('questionBody').classList.toggle('d-none');
+    document.getElementById('card-img-top').src = './images/brain.jpg';
+    currentQuestion = 0;
+    clickable = true;
+    amountCorrectAnswers = 0;
+    amountAnsweredAnswers = 0;
+    updateProgressBar();
+    init();
+};
+
+
+function stopAudio(audio) {
+    audio.pause();
+    audio.currentTime = 0;
+};
