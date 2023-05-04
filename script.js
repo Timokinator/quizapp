@@ -62,6 +62,9 @@ let currentQuestion = 0;
 let clickable = true;
 let amountCorrectAnswers = 0;
 let amountAnsweredAnswers = 0;
+let audio_success = new Audio('./sounds/success.mp3');
+let audio_fail = new Audio('./sounds/fail.mp3');
+audio_fail.volume = 0.3;
 
 
 function init() {
@@ -96,9 +99,11 @@ function answer(selection) {
         if (correctAnswer == selectedQuestionNumner) {
             document.getElementById(selection).parentNode.classList.add('bg-success');
             amountCorrectAnswers++;
+            audio_success.play();
         } else {
             document.getElementById(selection).parentNode.classList.add('bg-danger');
             document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+            audio_fail.play();
         };
         document.getElementById('next-button').disabled = false;
         clickable = false;
@@ -107,6 +112,8 @@ function answer(selection) {
 
 
 function nextQuestion() {
+    stopAudio(audio_fail);
+    stopAudio(audio_success);
     clickable = true;
     currentQuestion++;
     document.getElementById('next-button').disabled = true;
@@ -161,4 +168,10 @@ function restart() {
     amountAnsweredAnswers = 0;
     updateProgressBar();
     init();
+};
+
+
+function stopAudio(audio) {
+    audio.pause();
+    audio.currentTime = 0;
 };

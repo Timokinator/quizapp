@@ -73,3 +73,28 @@ body {
 .bold {
     font-weight: bold;
 }
+
+footer {
+    font-size: 8px;
+    border-top: 1px solid grey;
+}
+
+
+@media (max-width: 500px) {
+    .container {
+        width: 100%;
+        padding: 0;
+    }
+
+    .card-body {
+        width: 100%;
+    }
+
+    .container-fluid{
+        justify-content: center !important;
+    }
+
+    h5 {
+        font-size: 18px;
+    }
+}
